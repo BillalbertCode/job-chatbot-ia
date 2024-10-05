@@ -1,14 +1,18 @@
-export async function POST(request: Request) {
-    const req = await request.json()
+import { google } from "@ai-sdk/google"
+import { streamText } from "ai"
 
-    const { name, age } = req
+export async function POST(req: Request) {
 
-    if (!name || !age) {
-        return new Response("Error Bad Request", {
-            status: 400
-        })
+    const { messages } = await req.json()
+
+    const result = await streamText({
+        model: google("gemini-1.5-pro-latest"),
+        prompt: messages,
+        system: "You are an assistant specialized in career counseling and more. Your answers should be simple unless you are asked to explain them."
+    })
+
+    for await (const textPart of result.textStream) {
+        console.log(textPart);
     }
-
-    const res: string = `Hola ${name} wao si has cambiao, ahora eres ${age >= 18 ? "mayor de edad" : "menor de edad"}`
-    return Response.json(res)
+    return result.toDataStreamResponse()
 }   
