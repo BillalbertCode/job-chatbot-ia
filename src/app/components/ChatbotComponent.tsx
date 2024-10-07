@@ -2,7 +2,11 @@
 // Component form IA QUestions
 import React, { useState, useEffect } from "react"
 import { useChat } from "ai/react"
+import { ChatRequestOptions } from "ai"
+// Icons
 import { FaPaperPlane, FaRobot, FaUser } from "react-icons/fa"
+// styles
+import animation from "@/app/styles/animation.module.css"
 
 const ChatbotComponent = () => {
 
@@ -11,8 +15,12 @@ const ChatbotComponent = () => {
     // ref of containter cat for overflow
     const chatContainerRef: React.RefObject<HTMLDivElement> = React.createRef()
 
+    // Hook SDK
     const { messages, input, handleInputChange, handleSubmit } = useChat({
         keepLastMessageOnError: true,
+        onError(error) {
+            setError(error.message)
+        }
     })
 
     // scroll down when sending a message
@@ -22,8 +30,34 @@ const ChatbotComponent = () => {
         }
     }, [messages]);
 
+    // Elimination of error message when a key is pressed
+    useEffect(() => {
+        if (error) {
+            setError("");
+        }
+    }, [input]);
+
+    const handleSumission = (event?: React.FormEvent<HTMLFormElement>, options?: ChatRequestOptions) => {
+
+
+        if (input.length > 500) {
+            setError("Tu pregunta no puede ser mayor a 500 caracteres")
+            event?.preventDefault()
+            return;
+        } else if (input.trim() === "") {
+            setError("Tu pregunta no puede estar vacia")
+            event?.preventDefault()
+            return;
+        }
+
+        handleSubmit(event, {
+            ...options,
+            allowEmptySubmit: true,
+        })
+    }
+
     return (
-        <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="max-w-md mx-auto bg-transparent shadow-lg rounded-lg overflow-hidden">
             <div className="bg-cyan-600 text-white p-4 flex items-center">
                 <FaRobot className="text-2x1 mr-2" />
                 <h2 className="text-xl font-semibold">Job Chatbot</h2>
@@ -61,12 +95,12 @@ const ChatbotComponent = () => {
                     </div>
                 ))}
                 {error && (
-                    <div className="text-red-500 text-center animate-bounce">
+                    <div className={`text-red-600 text-center text-wrap ${error && animation.errorMessageVibration}`} >
                         {error}
                     </div>
                 )}
             </div>
-            <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200">
+            <form onSubmit={handleSumission} className="p-4 border-t border-gray-200">
                 <div className="flex space-x-2">
                     <input
                         type="text"
@@ -86,7 +120,7 @@ const ChatbotComponent = () => {
                     </button>
                 </div>
             </form>
-            
+
         </div>
     )
 }
