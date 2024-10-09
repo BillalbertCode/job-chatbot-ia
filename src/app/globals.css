@@ -2,16 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
+:root {
   --text-grandientCyanToBlue: linear-gradient(138deg, rgba(30, 188, 255, 1) 27%, rgba(0, 57, 255, 1) 100%);
 }
 
-body{
-  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(214,225,254,1) 100%);
+body {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(214, 225, 254, 1) 100%);
 }
 
 .textbg1 {
   background-image: var(--text-grandientCyanToBlue);
   background-clip: text;
   color: transparent;
+}
+
+.chatbotContainer::-webkit-scrollbar {
+  width: 15px;
+}
+
+.chatbotContainer::-webkit-scrollbar-thumb {
+  background: var(--text-grandientCyanToBlue);
+  border-radius: 5px;
 }

@@ -64,7 +64,7 @@ const ChatbotComponent = () => {
             </div>
             <div
                 ref={chatContainerRef}
-                className="h-96 overflow-y-auto p-4 space-y-4"
+                className="h-96 chatbotContainer overflow-y-auto p-4 space-y-4"
             >
                 {messages.map(message => (
                     <div
