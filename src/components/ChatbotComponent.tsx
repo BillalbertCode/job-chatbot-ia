@@ -6,7 +6,7 @@ import { ChatRequestOptions } from "ai"
 // Icons
 import { FaPaperPlane, FaRobot, FaUser } from "react-icons/fa"
 // styles
-import animation from "@/app/styles/animation.module.css"
+import animation from "@/styles/animation.module.css"
 
 const ChatbotComponent = () => {
 
@@ -58,9 +58,9 @@ const ChatbotComponent = () => {
 
     return (
         <div className="max-w-md mx-auto bg-transparent shadow-lg rounded-lg overflow-hidden">
-            <div className="bg-cyan-600 text-white p-4 flex items-center">
+            <div className="bg-transparent text-sky-600 p-4 flex items-center">
                 <FaRobot className="text-2x1 mr-2" />
-                <h2 className="text-xl font-semibold">Job Chatbot</h2>
+                <h2 className="text-xl font-semibold">Chatbot</h2>
             </div>
             <div
                 ref={chatContainerRef}
@@ -76,7 +76,7 @@ const ChatbotComponent = () => {
                     >
                         <div
                             className={`max-w-xs p-3 rounded-lg ${message.role === "user"
-                                ? "bg-cyan-500 text-white"
+                                ? "bg-blue-600 text-white"
                                 : "bg-gray-200 text-gray-800"
                                 }`}
                         >
