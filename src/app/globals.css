@@ -2,74 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  --text-grandientCyanToBlue: linear-gradient(138deg, rgba(30, 188, 255, 1) 27%, rgba(0, 57, 255, 1) 100%);
+}
+
 body{
   background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(214,225,254,1) 100%);
 }
 
 .textbg1 {
-  background-image: linear-gradient(138deg, rgba(30, 188, 255, 1) 27%, rgba(0, 57, 255, 1) 100%);
+  background-image: var(--text-grandientCyanToBlue);
   background-clip: text;
   color: transparent;
-}
-
-.bgFigure1 {
-  background: linear-gradient(307deg, rgba(0, 58, 213, 0) 0%, rgba(27, 172, 255, 0.24784482758620685) 50%, rgba(0, 176, 255, 0) 100%);
-  filter: blur(2px);
-}
-
-.bgFigure2 {
-  filter: blur(2px);
-  background: radial-gradient(circle, rgba(58,125,255,0.2543103448275862) 0%, rgba(58,125,255,0.1293103448275862) 12%, rgba(17,114,239,0) 71%);
-  
-}
-
-.multicolorIA {
-  fill: rgb(61, 61, 244);
-  animation: 8s ease-in-out infinite alternate startBrightness;
-}
-
-.multicolorIA:first-child {
-  animation-delay: 0s;
-}
-
-.multicolorIA:nth-child(2) {
-  animation-delay: 2s;
-}
-
-.multicolorIA:nth-child(3) {
-  animation-delay: 6s;
-}
-
-@keyframes startBrightness {
-  0% {
-    fill: rgb(61, 61, 244);
-  }
-
-  15% {
-    fill: rgb(35, 188, 249);
-  }
-
-  30% {
-    fill: rgb(78, 29, 241);
-  }
-
-  45% {
-    fill: rgb(81, 22, 244);
-  }
-
-  60% {
-    fill: rgb(61, 61, 244);
-  }
-
-  75% {
-    fill: rgb(35, 188, 249);
-  }
-
-  90% {
-    fill: rgb(78, 29, 241);
-  }
-
-  100% {
-    fill: rgb(241, 46, 255);
-  }
 }

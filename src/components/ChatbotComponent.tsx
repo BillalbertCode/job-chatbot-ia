@@ -58,7 +58,7 @@ const ChatbotComponent = () => {
 
     return (
         <div className="max-w-md mx-auto bg-transparent shadow-lg rounded-lg overflow-hidden">
-            <div className="bg-transparent text-sky-600 p-4 flex items-center">
+            <div className="bg-transparent text-blue-500 p-4 flex items-center">
                 <FaRobot className="text-2x1 mr-2" />
                 <h2 className="text-xl font-semibold">Chatbot</h2>
             </div>
@@ -76,8 +76,8 @@ const ChatbotComponent = () => {
                     >
                         <div
                             className={`max-w-xs p-3 rounded-lg ${message.role === "user"
-                                ? "bg-blue-600 text-white"
-                                : "bg-gray-200 text-gray-800"
+                                ? "bg-transparent text-grey-700"
+                                : "bg-transparent shadow-md shadow-blue-500 text-grey"
                                 }`}
                         >
                             <div className="flex items-center mb-1">
@@ -107,16 +107,16 @@ const ChatbotComponent = () => {
                         value={input}
                         name="prompt"
                         onChange={handleInputChange}
-                        className="flex-grow px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="flex-grow px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Escribe tu pregunta..."
                         aria-label="Escribe tu pregunta..."
                     />
                     <button
                         type="submit"
-                        className="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-colors duration-300"
+                        className="bg-blue-600 text-white px-4 py-2 active:animate-ping rounded-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-colors duration-300"
                         aria-label="Send message"
                     >
-                        <FaPaperPlane />
+                        <FaPaperPlane className="" />
                     </button>
                 </div>
             </form>
