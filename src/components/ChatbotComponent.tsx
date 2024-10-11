@@ -7,6 +7,7 @@ import { ChatRequestOptions } from "ai"
 import { FaPaperPlane, FaRobot, FaUser } from "react-icons/fa"
 // styles
 import animation from "@/styles/animation.module.css"
+import TypeWriter from "./utils/TypeWriter"
 
 const ChatbotComponent = () => {
 
@@ -16,7 +17,7 @@ const ChatbotComponent = () => {
     const chatContainerRef: React.RefObject<HTMLDivElement> = React.createRef()
 
     // Hook SDK
-    const { messages, input, handleInputChange, handleSubmit } = useChat({
+    const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
         keepLastMessageOnError: true,
         onError(error) {
             setError(error.message)
@@ -90,7 +91,10 @@ const ChatbotComponent = () => {
                                     {message.role === "user" ? "Tú" : "Job Chatbot"}
                                 </span>
                             </div>
-                            <p>{message.content}</p>
+                            {message.role === "user"
+                                ? <p>{message.content}</p>
+                                : <TypeWriter text={message.content} />
+                            }
                         </div>
                     </div>
                 ))}
@@ -112,6 +116,7 @@ const ChatbotComponent = () => {
                         aria-label="Escribe tu pregunta..."
                     />
                     <button
+                        disabled={isLoading}
                         type="submit"
                         className="bg-blue-600 text-white px-4 py-2 active:animate-ping rounded-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-colors duration-300"
                         aria-label="Send message"
