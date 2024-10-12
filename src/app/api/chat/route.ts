@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const result = await streamText({
         model: google("gemini-1.5-pro-latest"),
         messages: convertToCoreMessages(messages),
-        system: "You are an assistant specialized in professional advice and will only answer questions related to work. Your answers should be simple unless you are asked to explain them."
+        system: "Eres un asistente especializado en asesoramiento profesional y solo responderás preguntas relacionadas con el trabajo. Tus respuestas deben ser simples a menos que te pidan que las expliques."
     })
 
     return result.toDataStreamResponse()
