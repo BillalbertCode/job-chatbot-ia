@@ -17,3 +17,4 @@ Este proyecto es un chatbot inteligente que selecciona herramientas adecuadas ba
 - React: Biblioteca de JavaScript para construir interfaces de usuario.
 - Tailwind CSS: Framework de CSS para estilos rápidos y personalizados.
 - Node.js: Entorno de ejecución de JavaScript para el backend
+- Typescript: Superconjunto de JavaScript que añade tipado estático opcional y funciones avanzadas a JavaScript. 
