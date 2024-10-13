@@ -49,7 +49,7 @@ export default function RootLayout({
               </div>
               <div className="sm:text-start text-center text-slate-300">
                 <h5 className="text-base text-slate-200 font-bold">Redes Sociales</h5>
-                <div className="flex justify-center gap-4">
+                <div className="flex sm:justify-start justify-center gap-4">
                   <ul>
                     <li>
                       <a href="https://bill.caribito.com/bill/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">

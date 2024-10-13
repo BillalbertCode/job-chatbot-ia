@@ -59,14 +59,14 @@ const ChatbotComponent = () => {
     }
 
     return (
-        <div className="max-w-md w-full sm:mx-auto h-full bg-transparent shadow-lg rounded-lg overflow-hidden">
+        <div className="max-w-md w-full sm:mx-auto sm:h-full bg-transparent shadow-lg rounded-lg overflow-hidden">
             <div className="bg-transparent text-blue-500 p-4 flex items-center">
                 <FaRobot className="text-2x1 mr-2" />
                 <h2 className="text-xl font-semibold">Chatbot</h2>
             </div>
             <div
                 ref={chatContainerRef}
-                className="h-96 chatbotContainer overflow-y-auto p-4 space-y-4"
+                className="sm:h-96 h-80 chatbotContainer overflow-y-auto p-4 space-y-4"
             >
                 {messages.map(message => (
                     <div
@@ -88,13 +88,13 @@ const ChatbotComponent = () => {
                                 ) : (
                                     <FaRobot className="mr-2" />
                                 )}
-                                <span className="font-semibold">
+                                <span className="font-semibold text-sm sm:text-base">
                                     {message.role === "user" ? "Tú" : "Job Chatbot"}
                                 </span>
                             </div>
                             {message.role === "user"
-                                ? <p>{message.content}</p>
-                                : <TypeWriter text={message.content} />
+                                ? <p className="text-xs sm:text-base">{message.content}</p>
+                                : <TypeWriter className="text-xs sm:text-base " text={message.content} />
                             }
                         </div>
                     </div>
