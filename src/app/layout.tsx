@@ -33,10 +33,10 @@ export default function RootLayout({
             <p className="text-white mb-4">
               © {new Date().getFullYear()} Job Chatbot. Todos los derechos reservados.
             </p>
-            <div className="w-full grid grid-cols-4 gap-4" >
-              <div className="text-start text-slate-300">
+            <div className="w-full grid sm:grid-cols-4 sm:gap-4 gap-6" >
+              <div className="sm:text-start text-center text-slate-300">
                 <h5 className="text-base text-slate-200 font-bold">Información sobre el proyecto.</h5>
-                <p>
+                <p > 
                   Este proyecto es un chatbot inteligente que selecciona herramientas adecuadas basadas en el contexto de la conversación, detectando automáticamente cambios en el tono y ajustando la interfaz de usuario según la herramienta activa.
                 </p>
                 <a href="https://github.com/billalbertcode/job-chatbot-ia" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 after:content-['_↗']">
@@ -47,9 +47,9 @@ export default function RootLayout({
                 <p >Powered by LLM Gemini and IA SDK</p>
                 <p >Built with Tailwind CSS and NextJS</p>
               </div>
-              <div className="text-start text-slate-300">
+              <div className="sm:text-start text-center text-slate-300">
                 <h5 className="text-base text-slate-200 font-bold">Redes Sociales</h5>
-                <div className="flex gap-4">
+                <div className="flex justify-center gap-4">
                   <ul>
                     <li>
                       <a href="https://bill.caribito.com/bill/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
@@ -86,7 +86,7 @@ export default function RootLayout({
                   </ul>
                 </div>
               </div>
-              <div className="text-start text-slate-300" >
+              <div className="sm:text-start text-center text-slate-300" >
                 <h5 className="text-base text-slate-200 font-bold">Información de contacto.</h5>
                 <p>Cualquier información de feedback o requerimiento de mis servicios, contactame.</p>
                 <a className="hover:text-slate-200" href="mailto:billalbertcode@gmail.com" >billalbertcode@gmail.com</a>
@@ -95,7 +95,7 @@ export default function RootLayout({
                   Portfolio</a>
                 </p>
               </div>
-              <div className=" text-start text-slate-300">
+              <div className="sm:text-start text-center text-slate-300">
                 <h5 className="text-base text-slate-200 font-bold">Copyright y Legalidades</h5>
                 <ul>
                   <li>
