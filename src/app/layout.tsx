@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="flex min-h-screen relative container mx-auto flex-col items-center p-16">
+        <main className="flex min-h-screen relative container mx-auto flex-col items-center p-4 sm:p-16">
           {children}
           <div className={`absolute rounded top-0 right-40 h-16 w-16 ${stylesFigure.bgFigure1}`}>
           </div>
