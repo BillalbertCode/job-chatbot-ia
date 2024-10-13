@@ -3,11 +3,12 @@
 import React, { useState, useEffect } from "react"
 import { useChat } from "ai/react"
 import { ChatRequestOptions } from "ai"
+// Components
+import TypeWriter from "./utils/TypeWriter"
 // Icons
 import { FaPaperPlane, FaRobot, FaUser } from "react-icons/fa"
 // styles
 import animation from "@/styles/animation.module.css"
-import TypeWriter from "./utils/TypeWriter"
 
 const ChatbotComponent = () => {
 
@@ -58,7 +59,7 @@ const ChatbotComponent = () => {
     }
 
     return (
-        <div className="max-w-md mx-auto bg-transparent shadow-lg rounded-lg overflow-hidden">
+        <div className="max-w-md mx-auto h-full bg-transparent shadow-lg rounded-lg overflow-hidden">
             <div className="bg-transparent text-blue-500 p-4 flex items-center">
                 <FaRobot className="text-2x1 mr-2" />
                 <h2 className="text-xl font-semibold">Chatbot</h2>

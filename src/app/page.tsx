@@ -1,14 +1,18 @@
+// The Home Page
+// Components
 import ChatbotComponent from "../components/ChatbotComponent";
+// Icons
 import { SiGooglegemini } from "react-icons/si";
+// Styles
 import stylesCss from "@/styles/figure.module.css"
 
 export default function Home() {
   return (
     <>
       <section id="Hero" className="mb-16 text-wrap w-9/12 max-w-4xl">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center relative">
           <h1 className="textbg1 tracking-wide text-center text-6xl font-extrabold mb-2">
-            Job Chatbot <span>IA</span>
+            Job Chatbot <span className="relative">IA</span>
           </h1>
           <div className="relative p-4 h-16">
             <SiGooglegemini className={`${stylesCss.starIA} absolute bottom-3 left-0 text-xl`} />

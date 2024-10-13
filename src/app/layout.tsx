@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Chatbot inteligente enfocado en la asistencia de trabajo, con uso interactivo de herramientas para ayudar a los usuarios con distintas tareas.",
   keywords: ["Job Chatbot IA", "Asistente de trabajo IA", "Chatbot asistente de trabajo", "Work Chatbot"],
   creator: "BillalbertCode",
-  authors: [{name:"Billalbert Martinez", url: "https://bill.caribito.com/bill/"}]
+  authors: [{ name: "Billalbert Martinez", url: "https://bill.caribito.com/bill/" }]
 };
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="flex h-screen min-h-screen relative container mx-auto flex-col items-center p-16">
+        <main className="flex min-h-screen relative container mx-auto flex-col items-center p-16">
           {children}
           <div className={`absolute rounded top-0 right-40 h-16 w-16 ${stylesFigure.bgFigure1}`}>
           </div>
@@ -79,11 +79,9 @@ export default function RootLayout({
                       </a>
                     </li>
                     <li>
-                      <li>
-                        <a href="https://instagram.com/billalbertcode" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
-                          X (Twitter)
-                        </a>
-                      </li>
+                      <a href="https://instagram.com/billalbertcode" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
+                        X (Twitter)
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -92,11 +90,11 @@ export default function RootLayout({
                 <h5 className="text-base text-slate-200 font-bold">Información de contacto.</h5>
                 <p>Cualquier información de feedback o requerimiento de mis servicios, contactame.</p>
                 <a className="hover:text-slate-200" href="mailto:billalbertcode@gmail.com" >billalbertcode@gmail.com</a>
-                <a href="https://bill.caribito.com/bill/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
-                  Portfolio
-                </a>
+                <br /><br />
+                <p>Otros Proyectos en: <a href="https://bill.caribito.com/bill/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 after:content-['_↗']">
+                  Portfolio</a>
+                </p>
               </div>
-
               <div className=" text-start text-slate-300">
                 <h5 className="text-base text-slate-200 font-bold">Copyright y Legalidades</h5>
                 <ul>
