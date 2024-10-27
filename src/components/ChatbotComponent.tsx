@@ -9,6 +9,7 @@ import TypeWriter from "./utils/TypeWriter"
 import { FaPaperPlane, FaRobot, FaUser } from "react-icons/fa"
 // styles
 import animation from "@/styles/animation.module.css"
+import CoverLetterTool from "./tools/CoverLetterTool"
 
 const ChatbotComponent = () => {
 
@@ -68,6 +69,7 @@ const ChatbotComponent = () => {
                 ref={chatContainerRef}
                 className="sm:h-96 h-80 chatbotContainer overflow-y-auto p-4 space-y-4"
             >
+                {/* Messages UI */}
                 {messages.map(message => (
                     <div
                         key={message.id}
@@ -96,6 +98,33 @@ const ChatbotComponent = () => {
                                 ? <p className="text-xs sm:text-base">{message.content}</p>
                                 : <TypeWriter className="text-xs sm:text-base " text={message.content} />
                             }
+
+                            {/* Tools IA */}
+                            {message.toolInvocations?.map(toolInvocation => {
+                                const { toolName, toolCallId, state } = toolInvocation
+
+                                if (state === "result") {
+                                    const { result } = toolInvocation
+
+                                    switch (toolName) {
+                                        case "generateCoverLetterTool":
+                                            return (
+                                                <div key={toolCallId}>
+                                                    <CoverLetterTool {...result} />
+                                                </div>
+                                            );
+                                        default:
+                                            break;
+                                    }
+                                } else {
+                                    return (
+                                        <div key={toolCallId}>
+                                            <div>loading...</div>
+                                        </div>
+                                    )
+                                }
+                            })
+                            }
                         </div>
                     </div>
                 ))}
@@ -105,6 +134,7 @@ const ChatbotComponent = () => {
                     </div>
                 )}
             </div>
+            {/* Form of chat with IA */}
             <form onSubmit={handleSumission} className="flex p-4 w-full space-x-2 border-t border-gray-200">
                 <input
                     type="text"
@@ -119,7 +149,7 @@ const ChatbotComponent = () => {
                     disabled={isLoading}
                     type="submit"
                     className={`${!isLoading ? "shadow-md bg-blue-600 active:animate-ping hover:bg-blue-500" : "bg-blue-400 cursor-not-allowed"} shadow-cyan-800 text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-600 focus:ring-offset-2 transition-colors duration-300`}
-                    aria-label="Send message" 
+                    aria-label="Send message"
                 >
                     <FaPaperPlane className="drop-shadow-lg" />
                 </button>

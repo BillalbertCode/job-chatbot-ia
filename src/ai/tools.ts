@@ -74,11 +74,11 @@ export const generateCVTool = createTool({
 export const generateCoverLetterTool = createTool({
     description: "Generador de carta de presentación",
     parameters: z.object({
-        asunto: z.string().describe("Asunto de la carta de presentación"),
+        subject: z.string().describe("Asunto de la carta de presentación"),
         content: z.string().describe("Descripción de la carta de presentación")
     }),
-    execute: async ({ asunto, content }) => ({
-        asunto,
+    execute: async ({ subject, content }) => ({
+        subject,
         content
     })
 })
