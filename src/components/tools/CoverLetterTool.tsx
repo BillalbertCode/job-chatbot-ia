@@ -3,13 +3,13 @@
 import CopyText from "../utils/CopyText";
 import LayoutTool from "./LayoutTool";
 
-type CoverLetterToolrProps = {
+type CoverLetterToolProps = {
     subject: string;
     content: string;
 }
 
 
-const CoverLetterTool = ({ subject, content }: CoverLetterToolrProps) => {
+const CoverLetterTool = ({ subject, content }: CoverLetterToolProps) => {
     return (
         <LayoutTool toolName="Cover Letter">
             <div className="text-base font-bold">

@@ -5,11 +5,11 @@ import { useChat } from "ai/react"
 import { ChatRequestOptions } from "ai"
 // Components
 import TypeWriter from "./utils/TypeWriter"
+import CoverLetterTool from "./tools/CoverLetterTool"
 // Icons
 import { FaPaperPlane, FaRobot, FaUser } from "react-icons/fa"
 // styles
 import animation from "@/styles/animation.module.css"
-import CoverLetterTool from "./tools/CoverLetterTool"
 
 const ChatbotComponent = () => {
 
