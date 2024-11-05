@@ -1,6 +1,5 @@
 // Template for generation Hardvard CV
-
-import React from "react";
+import React, { forwardRef } from "react";
 
 interface PersonalInfo {
     name: string;
@@ -66,9 +65,9 @@ interface UserProps {
 }
 
 
-const HarvardTemplate: React.FC<UserProps> = ({ user }) => {
+const HarvardTemplate = forwardRef<HTMLDivElement, UserProps>(({ user }, ref) => {
     return (
-        <div style={{ width: "920px" }} className="container mx-auto p-5 bg-white text-black">
+        <div ref={ref} style={{ width: "600px" }} className="container mx-auto p-5 bg-white text-black">
             <div className="flex flex-col items-center">
                 <h1 className="text-2xl">{`${user.personalInfo.name} ${user.personalInfo.lastName} `}</h1>
                 <div>
@@ -127,7 +126,7 @@ const HarvardTemplate: React.FC<UserProps> = ({ user }) => {
             }
         </div>
     )
-}
+})
 
 export default HarvardTemplate;
 
@@ -225,7 +224,7 @@ const SchemeProjects: React.FC<SchemeProjectsProps> = ({ project }) => {
     );
 }
 
-interface SchemeLidershipProps{
+interface SchemeLidershipProps {
     leadership: LeadershipActivity
 }
 
@@ -258,7 +257,7 @@ const SchemeLidership: React.FC<SchemeLidershipProps> = ({ leadership }) => {
 }
 
 // Esquema de habilidades
-interface SchemeSkillsProps{
+interface SchemeSkillsProps {
     technicalSkills: TechnicalSkill
 }
 

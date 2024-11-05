@@ -1,11 +1,11 @@
 // Using for generation CV with user info
 "use client"
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 // Components
 import LayoutTool from "../LayoutTool"
 // Helpers
-import downloadPDF from "./helper/downloadPDF"
 import HarvardTemplate from "./templates/HarvardTemplate"
+import HarvardTemplatePDF from "./templates/HarvardTemplatePDF";
 
 const userI = {
     personalInfo: {
@@ -109,10 +109,12 @@ const userI = {
 
 const GenerateCVTool = (user: Object) => {
 
+    const templateRef = useRef<HTMLDivElement>(null)
     //  Templates options
     const templates: { [key: string]: JSX.Element } = {
-        Harvard: <HarvardTemplate user={userI} />,
-        Example: <p>Template Example</p>
+        Harvard: <HarvardTemplate user={userI} ref={templateRef} />,
+        Example: <div style={{background: "blue", textAlign: "center", fontSize: "10px"}} ref={templateRef} >Template Example</div>,
+        HarvardPDF: <HarvardTemplatePDF></HarvardTemplatePDF>
     }
 
     // capture select template
@@ -124,6 +126,7 @@ const GenerateCVTool = (user: Object) => {
 
     //  Template container ref
     const templateCVRef: React.RefObject<HTMLDivElement> = React.createRef()
+
 
     return (
         <LayoutTool toolName="Generate CV">
@@ -141,12 +144,12 @@ const GenerateCVTool = (user: Object) => {
                     </div>
                 ))}
             </div>
-            <div ref={templateCVRef} >
-                {templates[selectTemplate]}
-            </div>
+
+            {/* Template select Render */}
+            {templates[selectTemplate]}
+
             <button
                 className="hover:bg-red-600"
-                onClick={() => downloadPDF(templateCVRef)}
             >
                 Download PDF
             </button>
