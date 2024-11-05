@@ -1,11 +1,12 @@
 // Using for generation CV with user info
 "use client"
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 // Components
 import LayoutTool from "../LayoutTool"
 // Helpers
-import HarvardTemplate from "./templates/HarvardTemplate"
 import HarvardTemplatePDF from "./templates/HarvardTemplatePDF";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import Example from "./templates/Example";
 
 const userI = {
     personalInfo: {
@@ -108,13 +109,10 @@ const userI = {
 };
 
 const GenerateCVTool = (user: Object) => {
-
-    const templateRef = useRef<HTMLDivElement>(null)
     //  Templates options
     const templates: { [key: string]: JSX.Element } = {
-        Harvard: <HarvardTemplate user={userI} ref={templateRef} />,
-        Example: <div style={{background: "blue", textAlign: "center", fontSize: "10px"}} ref={templateRef} >Template Example</div>,
-        HarvardPDF: <HarvardTemplatePDF></HarvardTemplatePDF>
+        HarvardPDF: <HarvardTemplatePDF />,
+        Example: <Example />
     }
 
     // capture select template
@@ -123,10 +121,6 @@ const GenerateCVTool = (user: Object) => {
     const handleSelectTemplate = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectTemplate(event.target.value);
     };
-
-    //  Template container ref
-    const templateCVRef: React.RefObject<HTMLDivElement> = React.createRef()
-
 
     return (
         <LayoutTool toolName="Generate CV">
@@ -144,15 +138,12 @@ const GenerateCVTool = (user: Object) => {
                     </div>
                 ))}
             </div>
-
-            {/* Template select Render */}
-            {templates[selectTemplate]}
-
-            <button
-                className="hover:bg-red-600"
+            <PDFDownloadLink
+                document={templates[selectTemplate]}
+                fileName={selectTemplate}
             >
-                Download PDF
-            </button>
+                Descargar
+            </PDFDownloadLink>
         </LayoutTool>
     )
 }
