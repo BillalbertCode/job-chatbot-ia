@@ -1,11 +1,11 @@
+"use client";
 // Using for generation CV with user info
-"use client"
 import React, { useState } from "react"
 // Components
 import LayoutTool from "../LayoutTool"
 // Helpers
 import HarvardTemplatePDF from "./templates/HarvardTemplatePDF";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import Example from "./templates/Example";
 
 const userI = {
@@ -111,7 +111,7 @@ const userI = {
 const GenerateCVTool = (user: Object) => {
     //  Templates options
     const templates: { [key: string]: JSX.Element } = {
-        HarvardPDF: <HarvardTemplatePDF />,
+        HarvardPDF: <HarvardTemplatePDF user={userI} />,
         Example: <Example />
     }
 
@@ -123,28 +123,37 @@ const GenerateCVTool = (user: Object) => {
     };
 
     return (
-        <LayoutTool toolName="Generate CV">
-            <div>
-                {Object.keys(templates).map(template => (
-                    <div key={template}>
-                        <input
-                            type="radio"
-                            name="template"
-                            value={template}
-                            checked={selectTemplate === template}
-                            onChange={handleSelectTemplate}
-                        />
-                        <label>{template}</label>
-                    </div>
-                ))}
-            </div>
-            <PDFDownloadLink
-                document={templates[selectTemplate]}
-                fileName={selectTemplate}
-            >
-                Descargar
-            </PDFDownloadLink>
-        </LayoutTool>
+        <>
+            <LayoutTool toolName="Generate CV">
+
+                {/* UI select template */}
+                <div>
+                    {Object.keys(templates).map(template => (
+                        <div key={template}>
+                            <input
+                                type="radio"
+                                name="template"
+                                value={template}
+                                checked={selectTemplate === template}
+                                onChange={handleSelectTemplate}
+                            />
+                            <label>{template}</label>
+                        </div>
+                    ))}
+                </div>
+                
+                {/* Button of download obviosly */}
+                <PDFDownloadLink
+                    document={templates[selectTemplate]}
+                    fileName={selectTemplate}
+                >
+                    descargar cv
+                </PDFDownloadLink>
+            </LayoutTool>
+            <PDFViewer style={{ width: "100%", height: "100vh" }}>
+                {templates[selectTemplate]}
+            </PDFViewer>
+        </>
     )
 }
 
