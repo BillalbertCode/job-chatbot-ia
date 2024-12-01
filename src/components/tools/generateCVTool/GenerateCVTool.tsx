@@ -1,4 +1,3 @@
-"use client";
 // Using for generation CV with user info
 import React, { useState } from "react"
 // Components
@@ -6,7 +5,9 @@ import LayoutTool from "../LayoutTool"
 // Helpers
 import HarvardTemplatePDF from "./templates/HarvardTemplatePDF";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import ReactPDF from "@react-pdf/renderer";
 import Example from "./templates/Example";
+import { CVProps, UserData } from "./CV.model";
 
 const userI = {
     personalInfo: {
@@ -108,10 +109,10 @@ const userI = {
     ]
 };
 
-const GenerateCVTool = (user: Object) => {
+const GenerateCVTool = (userData: UserData) => {
     //  Templates options
     const templates: { [key: string]: JSX.Element } = {
-        HarvardPDF: <HarvardTemplatePDF user={userI} />,
+        HarvardPDF: <HarvardTemplatePDF userData={userData} />,
         Example: <Example />
     }
 
@@ -121,6 +122,12 @@ const GenerateCVTool = (user: Object) => {
     const handleSelectTemplate = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectTemplate(event.target.value);
     };
+    if (!userData) {
+        console.log(userData)
+        return (
+            <p>loading</p>
+        )
+    }
 
     return (
         <>
@@ -141,7 +148,7 @@ const GenerateCVTool = (user: Object) => {
                         </div>
                     ))}
                 </div>
-                
+
                 {/* Button of download obviosly */}
                 <PDFDownloadLink
                     document={templates[selectTemplate]}
@@ -149,10 +156,10 @@ const GenerateCVTool = (user: Object) => {
                 >
                     descargar cv
                 </PDFDownloadLink>
+                <PDFViewer >
+                    {templates[selectTemplate]}
+                </PDFViewer>
             </LayoutTool>
-            <PDFViewer style={{ width: "100%", height: "100vh" }}>
-                {templates[selectTemplate]}
-            </PDFViewer>
         </>
     )
 }

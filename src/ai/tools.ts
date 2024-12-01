@@ -1,7 +1,7 @@
 // Tools for using in chatbot or other functions IA 
 import { tool as createTool } from "ai";
 import { z } from "zod"
-
+import Tools from "@/components/tools/tools.enums";
 export const contextTool = createTool({
     description: "Mostrar automaticamente el contexto de la conversación cada que cambie el tema de conversación.",
     parameters: z.object({
@@ -18,6 +18,13 @@ export const generateCVTool = createTool({
     description: "Generador de CV (Curriculum)",
     parameters: z.object({
         personDescription: z.string().max(300),
+        personalInfo: z.object({
+            name: z.string(),
+            lastName: z.string(),
+            email: z.string(),
+            phone: z.string(),
+            linkedin: z.string()
+        }),
         education: z.array(z.object({
             name: z.string(),
             location: z.string(),
@@ -61,7 +68,8 @@ export const generateCVTool = createTool({
             skills: z.array(z.string()).describe('Habilidades de la categoria')
         })).describe('Analiza la información del usuario para añadirle habilidades nuevas si compatibles con la descripción del empleo. Extraer las habilidades mas relevantes y dividelas en categorias'),
     }).describe('Extraer la información mas relevante del usuario y compatible con la descripción del empleo. Así como mejorar su lexico. Todo esto es para crear un curricullum apropiado a la descripción del empleo. '),
-    execute: async ({ personDescription, education, experience, projects, leadershipAndActivities, technicalSkills }) => ({
+    execute: async ({personalInfo, personDescription, education, experience, projects, leadershipAndActivities, technicalSkills }) => ({
+        personalInfo,
         personDescription,
         education,
         experience,
@@ -85,6 +93,6 @@ export const generateCoverLetterTool = createTool({
 
 export const tools = {
     changeContextAutomatically: contextTool,
-    generateCurriculum: generateCVTool,
-    generateCoverLetterTool: generateCoverLetterTool
+    [Tools.cvTool]: generateCVTool,
+    [Tools.coverLetterTool]: generateCoverLetterTool
 }

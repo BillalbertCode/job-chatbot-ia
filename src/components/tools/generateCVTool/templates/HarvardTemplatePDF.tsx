@@ -1,181 +1,67 @@
-"use client"
 // Template of resume vitae
 //  Using object on data user and react-pdef/renderer
 // 
-import { Document, Page, Text, View, StyleSheet, ViewProps } from "@react-pdf/renderer";
+import { Document, Page, Text, View, ViewProps } from "@react-pdf/renderer";
+// Types
+import { CVProps, Education, Experience, Project, LeadershipActivity, TechnicalSkill } from "../CV.model";
+import styles from "../CV.styles";
 import React, { ReactNode } from "react";
 
-// Types for user
-interface PersonalInfo {
-    name: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    linkedin: string;
-}
-
-interface Education {
-    name: string;
-    location: string;
-    degree: string;
-    concentration: string;
-    gpa?: string; // Opcional
-    graduationDate: string;
-    thesis?: string; // Opcional
-    relevantEvents?: string,
-    courseWorks?: string
-}
-
-interface Experience {
-    organization: string;
-    location: string;
-    position: string;
-    startDate: string;
-    endDate: string;
-    description: string;
-}
-
-interface Project {
-    name: string;
-    position: string;
-    link: string;
-    description: string;
-}
-
-interface LeadershipActivity {
-    organization: string;
-    location: string;
-    role: string;
-    startDate: string;
-    endDate: string;
-    achievements: string[];
-}
-
-interface TechnicalSkill {
-    category: string;
-    skills: string[];
-}
-
-interface User {
-    personalInfo: PersonalInfo;
-    education: Education[];
-    experience: Experience[];
-    projects: Project[];
-    leadershipAndActivities: LeadershipActivity[];
-    technicalSkills: TechnicalSkill[];
-}
-
-interface UserProps {
-    user: User;
-}
-
 // main component for render or download cv in pdf
-const HarvardTemplatePDF: React.FC<UserProps> = ({ user }) => {
-    return (
-        <Document>
-            <Page style={styles.body} size={"A4"}>
-                <View style={styles.header}>
-                    <Text style={styles.title}>{user.personalInfo.name} {user.personalInfo.lastName}</Text>
-                    <Text style={styles.text}>{user.personalInfo.email} | {user.personalInfo.phone}</Text>
-                </View>
-                {user.education.length > 0 &&
-                    (
-                        <LayoutSection titleSection="Educación">
-                            {user.education.map((edu, index) => (
-                                <SectionEducation key={index} education={edu} />
-                            ))}
-                        </LayoutSection>
-                    )
-                }
-                {user.experience.length > 0 &&
-                    (
-                        <LayoutSection titleSection="Experiencia">
-                            {user.experience.map((exp, index) => (
-                                <SectionExperience key={index} experience={exp} />
-                            ))}
-                        </LayoutSection>
-                    )}
-                {user.projects.length > 0 &&
-                    (
-                        <LayoutSection titleSection="Proyectos">
-                            {user.projects.map((project, index) => (
-                                <SectionProjects key={index} project={project} />
-                            ))}
-                        </LayoutSection>
-                    )}
-                {user.leadershipAndActivities.length > 0 &&
-                    (
-                        <LayoutSection titleSection="Liderazgo y Actividades">
-                            {user.leadershipAndActivities.map((leader, index) => (
-                                <SectionLeadership key={index} leadership={leader} />
-                            ))}
-                        </LayoutSection>
-                    )}
-                {user.technicalSkills.length > 0 &&
-                    (
-                        <LayoutSection titleSection="Habilidades Técnicas">
-                            {user.technicalSkills.map((skill, index) => (
-                                <SectionSkills key={index} technicalSkills={skill} />
-                            ))}
-                        </LayoutSection>
-                    )}
-            </Page>
-        </Document>
-    )
-}
+const HarvardTemplatePDF: React.FC<CVProps> = ({ userData }) => (
+    <Document>
+        <Page style={styles.body} size={"A4"}>
+            <View style={styles.header}>
+                <Text style={styles.title}>{userData.personalInfo.name} {userData.personalInfo.lastName}</Text>
+                <Text style={styles.text}>{userData.personalInfo.email} | {userData.personalInfo.phone}</Text>
+            </View>
+            {userData.education.length > 0 &&
+                (
+                    <LayoutSection titleSection="Educación">
+                        {userData.education.map((edu, index) => (
+                            <SectionEducation key={index} education={edu} />
+                        ))}
+                    </LayoutSection>
+                )
+            }
+            {userData.experience.length > 0 &&
+                (
+                    <LayoutSection titleSection="Experiencia">
+                        {userData.experience.map((exp, index) => (
+                            <SectionExperience key={index} experience={exp} />
+                        ))}
+                    </LayoutSection>
+                )}
+            {userData.projects.length > 0 &&
+                (
+                    <LayoutSection titleSection="Proyectos">
+                        {userData.projects.map((project, index) => (
+                            <SectionProjects key={index} project={project} />
+                        ))}
+                    </LayoutSection>
+                )}
+            {userData.leadershipAndActivities.length > 0 &&
+                (
+                    <LayoutSection titleSection="Liderazgo y Actividades">
+                        {userData.leadershipAndActivities.map((leader, index) => (
+                            <SectionLeadership key={index} leadership={leader} />
+                        ))}
+                    </LayoutSection>
+                )}
+            {userData.technicalSkills.length > 0 &&
+                (
+                    <LayoutSection titleSection="Habilidades Técnicas">
+                        {userData.technicalSkills.map((skill, index) => (
+                            <SectionSkills key={index} technicalSkills={skill} />
+                        ))}
+                    </LayoutSection>
+                )}
+        </Page>
+    </Document>
+)
+
 
 export default HarvardTemplatePDF
-
-// Styles for template on react pdf
-
-const styles = StyleSheet.create({
-    body: {
-        paddingTop: 35,
-        paddingBottom: 65,
-        paddingHorizontal: 35,
-    },
-    title: {
-        fontSize: 24,
-        textAlign: "center",
-    },
-    header: {
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-    },
-    subtitle: {
-        maxWidth: "65%",
-        fontSize: 14,
-        fontWeight: 700,
-    },
-    text: {
-        fontSize: 12,
-    },
-    textMediumBold: {
-        fontSize: 12,
-        fontWeight: 500,
-    },
-    textBold: {
-        fontSize: 12,
-        fontWeight: 700,
-    },
-    section: {
-        marginVertical: 5,
-    },
-    titleSection: {
-        fontSize: 14,
-        textAlign: "center"
-    },
-    sectionChildren: {
-        marginVertical: 5
-    },
-    justifyBetween: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-    }
-
-});
 
 // layout of sections
 interface LayoutSectionProps extends ViewProps {
@@ -339,9 +225,3 @@ const SectionSkills: React.FC<SectionSkillsProps> = ({ technicalSkills }) => {
         </View>
     )
 }
-
-
-
-
-
-
