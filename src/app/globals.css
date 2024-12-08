@@ -24,3 +24,9 @@ body {
   background: var(--text-grandientCyanToBlue);
   border-radius: 5px;
 }
+
+@layer components {
+  .btn {
+    @apply p-2 rounded-lg text-blue-950 font-medium border-2 border-white text-sm;
+  }
+}

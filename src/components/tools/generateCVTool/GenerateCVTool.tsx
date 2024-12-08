@@ -9,112 +9,15 @@ import ReactPDF from "@react-pdf/renderer";
 import Example from "./templates/Example";
 import { CVProps, UserData } from "./CV.model";
 
-const userI = {
-    personalInfo: {
-        name: "Billalbert",
-        lastName: "Martinez",
-        email: "billalbertcode@gmail.com",
-        phone: "04142240292",
-        linkedin: "https://www.linkedin.com/in/billalbertcode"
-    },
-    education: [
-        {
-            name: "Universidad de los Andes",
-            location: "Mérida, Venezuela",
-            degree: "Ingeniero en Sistemas",
-            concentration: "Desarrollo de Software",
-            gpa: "4.5/5",
-            graduationDate: "Noviembre 2015",
-            thesis: "Desarrollo de un sistema de gestión de proyectos",
-            relevantEvents: "Participación en conferencias de tecnología",
-            courseWorks: "Desarrollo de Software, Bases de Datos, Redes"
-        },
-        {
-            name: "Universidad Nacional Experimental del Táchira",
-            location: "San Cristóbal, Venezuela",
-            degree: "Licenciatura en Informática",
-            concentration: "Informática",
-            graduationDate: "Mayo 2010"
-        }
-    ],
-    experience: [
-        {
-            organization: "Tech Solutions",
-            location: "Caracas, Venezuela",
-            position: "Desarrollador de Software",
-            startDate: "Enero 2016",
-            endDate: "Diciembre 2018",
-            description: "Desarrollé aplicaciones web utilizando tecnologías como React y Node.js, y colaboré en un equipo ágil para mejorar la eficiencia del desarrollo."
-        },
-        {
-            organization: "Innovatech",
-            location: "Valencia, Venezuela",
-            position: "Ingeniero de Software Senior",
-            startDate: "Enero 2019",
-            endDate: "Presente",
-            description: "Lidero un equipo de desarrollo en la creación de soluciones de software personalizadas para clientes, aplicando metodologías ágiles y mejores prácticas de desarrollo."
-        }
-    ],
-    projects: [
-        {
-            name: "Sistema de Gestión de Proyectos",
-            position: "Desarrollador Principal",
-            link: "https://github.com/billalbert/sistema-gestion-proyectos",
-            description: "Desarrollé un sistema de gestión de proyectos que permite a los usuarios planificar, ejecutar y monitorear proyectos de manera eficiente."
-        },
-        {
-            name: "Aplicación Móvil de Compras",
-            position: "Desarrollador Full Stack",
-            link: "https://github.com/billalbert/aplicacion-compras",
-            description: "Colaboré en el desarrollo de una aplicación móvil que permite a los usuarios realizar compras en línea de manera fácil y rápida."
-        }
-    ],
-    leadershipAndActivities: [
-        {
-            organization: "Club de Programación de la Universidad",
-            location: "Mérida, Venezuela",
-            role: "Presidente",
-            startDate: "Enero 2014",
-            endDate: "Diciembre 2015",
-            achievements: [
-                "Organización de talleres de programación para estudiantes.",
-                "Fomento de la participación en competencias de programación."
-            ]
-        },
-        {
-            organization: "Voluntariado en Tecnología",
-            location: "Caracas, Venezuela",
-            role: "Coordinador de Proyectos",
-            startDate: "Enero 2018",
-            endDate: "Diciembre 2019",
-            achievements: [
-                "Lideré un equipo de voluntarios para enseñar programación a jóvenes en comunidades desfavorecidas.",
-                "Desarrollé un programa de capacitación en habilidades digitales."
-            ]
-        }
-    ],
-    technicalSkills: [
-        {
-            category: "Desarrollo Web",
-            skills: ["HTML", "CSS", "JavaScript", "React", "Node.js"]
-        },
-        {
-            category: "Base de Datos",
-            skills: ["MySQL", "MongoDB", "PostgreSQL"]
-        },
-        {
-            category: "Metodologías Ágiles",
-            skills: ["Scrum", "Kanban"]
-        }
-    ]
-};
-
 const GenerateCVTool = (userData: UserData) => {
     //  Templates options
+    // add here templates
     const templates: { [key: string]: JSX.Element } = {
-        HarvardPDF: <HarvardTemplatePDF userData={userData} />,
-        Example: <Example />
+        HarvardPDF: <HarvardTemplatePDF userData={userData} />
     }
+
+    // PDF VIEWER
+    const [pdfViewer, setPDFViewer] = useState(false)
 
     // capture select template
     const [selectTemplate, setSelectTemplate] = useState<string>(Object.keys(templates)[0])
@@ -130,37 +33,51 @@ const GenerateCVTool = (userData: UserData) => {
     }
 
     return (
-        <>
-            <LayoutTool toolName="Generate CV">
+        <LayoutTool toolName="Generate CV">
 
-                {/* UI select template */}
-                <div>
-                    {Object.keys(templates).map(template => (
-                        <div key={template}>
-                            <input
-                                type="radio"
-                                name="template"
-                                value={template}
-                                checked={selectTemplate === template}
-                                onChange={handleSelectTemplate}
-                            />
-                            <label>{template}</label>
-                        </div>
-                    ))}
-                </div>
-
+            {/* UI select template */}
+            <div className="flex flex-wrap rounded-lg text-sm text-white bg-blue-500 p-1 mb-2">
+                {Object.keys(templates).map((template, index) => (
+                    <label className="flex-auto text-center" key={index} >
+                        <input
+                            type="radio"
+                            name="template"
+                            className="hidden peer"
+                            value={template}
+                            checked={selectTemplate === template}
+                            onChange={handleSelectTemplate}
+                        />
+                        <span className="flex justify-center hover:bg-blue-400 cursor-pointer rounded-lg p-0.5 peer-checked:bg-white peer-checked:font-semibold peer-checked:text-blue-950 transition duration-150 ease-in-out">
+                            {template}
+                        </span>
+                    </label>
+                )
+                )}
+            </div>
+            <div className="flex justify-between gap-1">
                 {/* Button of download obviosly */}
                 <PDFDownloadLink
                     document={templates[selectTemplate]}
                     fileName={selectTemplate}
+                    className="btn bg-red-300 hover:bg-red-400"
                 >
-                    descargar cv
+                    Descargar en PDF
                 </PDFDownloadLink>
-                <PDFViewer >
-                    {templates[selectTemplate]}
-                </PDFViewer>
-            </LayoutTool>
-        </>
+                {/* button hidden pdf */}
+                <button onClick={() => setPDFViewer(!pdfViewer)} className="btn bg-blue-300 hover:bg-blue-400">
+                    {pdfViewer ? "Ocultar PDF" : "Mostrar PDF"}
+                </button>
+            </div>
+            {/* pdf viewer */}
+            <div className="relative flex justify-center mt-4">
+                {pdfViewer && (
+                    <PDFViewer className="absolute" style={{ minHeight: "400px", minWidth: "600px" }} >
+                        {templates[selectTemplate]}
+                    </PDFViewer>
+                )}
+            </div>
+
+        </LayoutTool>
     )
 }
 
