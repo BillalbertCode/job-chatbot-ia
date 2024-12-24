@@ -10,6 +10,9 @@ import CoverLetterTool from "./tools/CoverLetterTool"
 import { FaPaperPlane, FaRobot, FaUser } from "react-icons/fa"
 // styles
 import animation from "@/styles/animation.module.css"
+import GenerateCVTool from "./tools/generateCVTool/GenerateCVTool"
+// Types
+import Tools from "./tools/tools.enums"
 
 const ChatbotComponent = () => {
 
@@ -107,12 +110,18 @@ const ChatbotComponent = () => {
                                     const { result } = toolInvocation
 
                                     switch (toolName) {
-                                        case "generateCoverLetterTool":
+                                        case Tools.coverLetterTool:
                                             return (
                                                 <div key={toolCallId}>
                                                     <CoverLetterTool {...result} />
                                                 </div>
                                             );
+                                        case Tools.cvTool:
+                                            return (
+                                                <div key={toolCallId}>
+                                                    <GenerateCVTool {...result}/>
+                                                </div>
+                                            )
                                         default:
                                             break;
                                     }
