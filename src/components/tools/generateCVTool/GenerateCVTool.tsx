@@ -5,9 +5,7 @@ import LayoutTool from "../LayoutTool"
 // Helpers
 import HarvardTemplatePDF from "./templates/HarvardTemplatePDF";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
-import ReactPDF from "@react-pdf/renderer";
-import Example from "./templates/Example";
-import { CVProps, UserData } from "./CV.model";
+import {UserData } from "./CV.model";
 
 const GenerateCVTool = (userData: UserData) => {
     //  Templates options
