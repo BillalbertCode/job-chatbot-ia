@@ -21,6 +21,7 @@ export async function POST(req: Request) {
             } else if (InvalidToolArgumentsError.isInstance(error)) {
                 return 'The model called a tool with invalid arguments.';
             }
+            return 'An unknown error occurred.';
             // else if (ToolExecutionError.isInstance(error)   ){
             //     return 'The model called a tool that failed to execute.';
             // } else {
