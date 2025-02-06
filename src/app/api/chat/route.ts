@@ -1,5 +1,5 @@
 import { google } from "@ai-sdk/google"
-import { convertToCoreMessages, InvalidToolArgumentsError, NoSuchModelError, NoSuchToolError, streamText } from "ai"
+import { convertToCoreMessages, InvalidToolArgumentsError, NoSuchToolError, streamText } from "ai"
 import { tools } from "@/ai/tools"
 
 export async function POST(req: Request) {

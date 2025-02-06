@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react"
 import { useChat } from "ai/react"
 import { ChatRequestOptions } from "ai"
 // Components
-import TypeWriter from "./utils/TypeWriter"
+import TypeWriter from "@/components/utils/TypeWriter"
 import CoverLetterTool from "./tools/CoverLetterTool"
 // Icons
 import { FaPaperPlane, FaRobot, FaUser } from "react-icons/fa"
@@ -19,7 +19,7 @@ const ChatbotComponent = () => {
     const [error, setError] = useState("")
 
     // ref of containter cat for overflow
-    const chatContainerRef: React.RefObject<HTMLDivElement> = React.createRef()
+    const chatContainerRef = React.useRef<HTMLDivElement | null>(null)
 
     // Hook SDK
     const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
@@ -41,7 +41,7 @@ const ChatbotComponent = () => {
         if (error) {
             setError("");
         }
-    }, [input]);
+    }, [input, error]);
 
     const handleSumission = (event?: React.FormEvent<HTMLFormElement>, options?: ChatRequestOptions) => {
 
@@ -119,7 +119,7 @@ const ChatbotComponent = () => {
                                         case Tools.cvTool:
                                             return (
                                                 <div key={toolCallId}>
-                                                    <GenerateCVTool {...result}/>
+                                                    <GenerateCVTool {...result} />
                                                 </div>
                                             )
                                         default:

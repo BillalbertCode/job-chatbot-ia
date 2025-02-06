@@ -1,3 +1,4 @@
+"use client"
 // Using for generation CV with user info
 import React, { useState } from "react"
 // Components
@@ -7,7 +8,7 @@ import HarvardTemplatePDF from "./templates/HarvardTemplatePDF";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import {UserData } from "./CV.model";
 
-const GenerateCVTool = (userData: UserData) => {
+const GenerateCVTool = ({ userData }: { userData: UserData }) => {
     //  Templates options
     // add here templates
     const templates: { [key: string]: JSX.Element } = {

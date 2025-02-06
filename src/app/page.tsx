@@ -1,6 +1,6 @@
 // The Home Page
 // Components
-import ChatbotComponent from "../components/ChatbotComponent";
+import ChatbotComponent from "@/components/ChatbotComponent";
 // Icons
 import { SiGooglegemini } from "react-icons/si";
 // Styles

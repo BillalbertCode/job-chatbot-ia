@@ -1,5 +1,5 @@
-// component for design of tool coverLetter
 "use client"
+// component for design of tool coverLetter
 import CopyText from "../utils/CopyText";
 import LayoutTool from "./LayoutTool";
 

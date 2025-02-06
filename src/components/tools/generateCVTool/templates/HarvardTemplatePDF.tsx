@@ -1,3 +1,4 @@
+"use client"
 // Template of resume vitae
 //  Using object on data user and react-pdef/renderer
 // 
