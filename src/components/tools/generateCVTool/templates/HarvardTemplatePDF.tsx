@@ -1,68 +1,13 @@
-"use client"
 // Template of resume vitae
 //  Using object on data user and react-pdef/renderer
 // 
 import { Document, Page, Text, View, ViewProps } from "@react-pdf/renderer";
 // Types
-import { CVProps, Education, Experience, Project, LeadershipActivity, TechnicalSkill } from "../CV.model";
+import { CVProps, Education, Experience, Project, LeadershipActivity, TechnicalSkill } from "@/components/tools/generateCVTool/CV.model";
 import styles from "../CV.styles";
 import React, { ReactNode } from "react";
 
-// main component for render or download cv in pdf
-const HarvardTemplatePDF: React.FC<CVProps> = ({ userData }) => (
-    <Document>
-        <Page style={styles.body} size={"A4"}>
-            <View style={styles.header}>
-                <Text style={styles.title}>{userData.personalInfo.name} {userData.personalInfo.lastName}</Text>
-                <Text style={styles.text}>{userData.personalInfo.email} | {userData.personalInfo.phone}</Text>
-            </View>
-            {userData.education.length > 0 &&
-                (
-                    <LayoutSection titleSection="Educación">
-                        {userData.education.map((edu, index) => (
-                            <SectionEducation key={index} education={edu} />
-                        ))}
-                    </LayoutSection>
-                )
-            }
-            {userData.experience.length > 0 &&
-                (
-                    <LayoutSection titleSection="Experiencia">
-                        {userData.experience.map((exp, index) => (
-                            <SectionExperience key={index} experience={exp} />
-                        ))}
-                    </LayoutSection>
-                )}
-            {userData.projects.length > 0 &&
-                (
-                    <LayoutSection titleSection="Proyectos">
-                        {userData.projects.map((project, index) => (
-                            <SectionProjects key={index} project={project} />
-                        ))}
-                    </LayoutSection>
-                )}
-            {userData.leadershipAndActivities.length > 0 &&
-                (
-                    <LayoutSection titleSection="Liderazgo y Actividades">
-                        {userData.leadershipAndActivities.map((leader, index) => (
-                            <SectionLeadership key={index} leadership={leader} />
-                        ))}
-                    </LayoutSection>
-                )}
-            {userData.technicalSkills.length > 0 &&
-                (
-                    <LayoutSection titleSection="Habilidades Técnicas">
-                        {userData.technicalSkills.map((skill, index) => (
-                            <SectionSkills key={index} technicalSkills={skill} />
-                        ))}
-                    </LayoutSection>
-                )}
-        </Page>
-    </Document>
-)
 
-
-export default HarvardTemplatePDF
 
 // layout of sections
 interface LayoutSectionProps extends ViewProps {
@@ -70,7 +15,7 @@ interface LayoutSectionProps extends ViewProps {
     children: ReactNode
 }
 
-const LayoutSection: React.FC<LayoutSectionProps> = ({ titleSection, children, ...props }) => {
+function LayoutSection({ titleSection, children, ...props }: LayoutSectionProps) {
     return (
         <View {...props} style={styles.section}>
             <Text style={styles.titleSection}>{titleSection}</Text>
@@ -84,7 +29,7 @@ interface SectionEducationProps {
     education: Education;
 }
 
-const SectionEducation: React.FC<SectionEducationProps> = ({ education }) => {
+function SectionEducation({ education }: SectionEducationProps) {
     const {
         name,
         location,
@@ -123,7 +68,7 @@ interface SectionExperienceProps {
     experience: Experience
 }
 
-const SectionExperience: React.FC<SectionExperienceProps> = ({ experience }) => {
+function SectionExperience({ experience }: SectionExperienceProps) {
     const {
         organization,
         location,
@@ -153,7 +98,7 @@ interface SectionProjectsProps {
     project: Project
 }
 
-const SectionProjects: React.FC<SectionProjectsProps> = ({ project }) => {
+function SectionProjects({ project }: SectionProjectsProps) {
     const {
         name,
         position,
@@ -175,7 +120,7 @@ interface SectionLeadershipProps {
     leadership: LeadershipActivity
 }
 
-const SectionLeadership: React.FC<SectionLeadershipProps> = ({ leadership }) => {
+function SectionLeadership({ leadership }: SectionLeadershipProps) {
     const {
         organization,
         location,
@@ -207,7 +152,7 @@ interface SectionSkillsProps {
     technicalSkills: TechnicalSkill
 }
 
-const SectionSkills: React.FC<SectionSkillsProps> = ({ technicalSkills }) => {
+function SectionSkills({ technicalSkills }: SectionSkillsProps) {
     const {
         category,
         skills,
@@ -224,5 +169,63 @@ const SectionSkills: React.FC<SectionSkillsProps> = ({ technicalSkills }) => {
                 ))}
             </Text>
         </View>
+    )
+}
+
+// main component for render or download cv in pdf
+export default function HarvardTemplatePDF({ userData }: CVProps) {
+    if (!userData) {
+        return <Text>No se encontraron datos para mostrar.</Text>;
+    }
+    return (
+        <Document>
+            <Page style={styles.body} size={"A4"}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>{userData.personalInfo.name} {userData.personalInfo.lastName}</Text>
+                    <Text style={styles.text}>{userData.personalInfo.email} | {userData.personalInfo.phone}</Text>
+                </View>
+                {userData.education.length > 0 &&
+                    (
+                        <LayoutSection titleSection="Educación">
+                            {userData.education.map((edu, index) => (
+                                <SectionEducation key={index} education={edu} />
+                            ))}
+                        </LayoutSection>
+                    )
+                }
+                {userData.experience.length > 0 &&
+                    (
+                        <LayoutSection titleSection="Experiencia">
+                            {userData.experience.map((exp, index) => (
+                                <SectionExperience key={index} experience={exp} />
+                            ))}
+                        </LayoutSection>
+                    )}
+                {userData.projects.length > 0 &&
+                    (
+                        <LayoutSection titleSection="Proyectos">
+                            {userData.projects.map((project, index) => (
+                                <SectionProjects key={index} project={project} />
+                            ))}
+                        </LayoutSection>
+                    )}
+                {userData.leadershipAndActivities.length > 0 &&
+                    (
+                        <LayoutSection titleSection="Liderazgo y Actividades">
+                            {userData.leadershipAndActivities.map((leader, index) => (
+                                <SectionLeadership key={index} leadership={leader} />
+                            ))}
+                        </LayoutSection>
+                    )}
+                {userData.technicalSkills.length > 0 &&
+                    (
+                        <LayoutSection titleSection="Habilidades Técnicas">
+                            {userData.technicalSkills.map((skill, index) => (
+                                <SectionSkills key={index} technicalSkills={skill} />
+                            ))}
+                        </LayoutSection>
+                    )}
+            </Page>
+        </Document>
     )
 }

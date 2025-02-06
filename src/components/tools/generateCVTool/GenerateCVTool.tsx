@@ -1,14 +1,15 @@
-"use client"
+"use client";
 // Using for generation CV with user info
 import React, { useState } from "react"
 // Components
 import LayoutTool from "../LayoutTool"
-// Helpers
 import HarvardTemplatePDF from "./templates/HarvardTemplatePDF";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
-import {UserData } from "./CV.model";
+// Helpers
+// import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+// modelo
+import { UserData } from "@/components/tools/generateCVTool/CV.model";
 
-const GenerateCVTool = ({ userData }: { userData: UserData }) => {
+export default function GenerateCVTool(userData: UserData) {
     //  Templates options
     // add here templates
     const templates: { [key: string]: JSX.Element } = {
@@ -55,13 +56,13 @@ const GenerateCVTool = ({ userData }: { userData: UserData }) => {
             </div>
             <div className="flex justify-between gap-1">
                 {/* Button of download obviosly */}
-                <PDFDownloadLink
+                {/* <PDFDownloadLink
                     document={templates[selectTemplate]}
                     fileName={selectTemplate}
                     className="btn bg-red-300 hover:bg-red-400"
                 >
                     Descargar en PDF
-                </PDFDownloadLink>
+                </PDFDownloadLink> */}
                 {/* button hidden pdf */}
                 <button onClick={() => setPDFViewer(!pdfViewer)} className="btn bg-blue-300 hover:bg-blue-400">
                     {pdfViewer ? "Ocultar PDF" : "Mostrar PDF"}
@@ -69,15 +70,13 @@ const GenerateCVTool = ({ userData }: { userData: UserData }) => {
             </div>
             {/* pdf viewer */}
             <div className="relative flex justify-center mt-4">
-                {pdfViewer && (
+                {/* {pdfViewer && (
                     <PDFViewer className="absolute" style={{ minHeight: "400px", minWidth: "600px" }} >
                         {templates[selectTemplate]}
                     </PDFViewer>
-                )}
+                )} */}
             </div>
 
         </LayoutTool>
     )
 }
-
-export default GenerateCVTool

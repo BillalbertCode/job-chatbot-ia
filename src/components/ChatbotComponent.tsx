@@ -6,15 +6,17 @@ import { ChatRequestOptions } from "ai"
 // Components
 import TypeWriter from "@/components/utils/TypeWriter"
 import CoverLetterTool from "./tools/CoverLetterTool"
+import GenerateCVTool from "@/components/tools/generateCVTool/GenerateCVTool"
+
+
 // Icons
 import { FaPaperPlane, FaRobot, FaUser } from "react-icons/fa"
 // styles
 import animation from "@/styles/animation.module.css"
-import GenerateCVTool from "./tools/generateCVTool/GenerateCVTool"
 // Types
 import Tools from "./tools/tools.enums"
 
-const ChatbotComponent = () => {
+export default function ChatbotComponent() {
 
     const [error, setError] = useState("")
 
@@ -116,12 +118,14 @@ const ChatbotComponent = () => {
                                                     <CoverLetterTool {...result} />
                                                 </div>
                                             );
-                                        case Tools.cvTool:
-                                            return (
-                                                <div key={toolCallId}>
-                                                    <GenerateCVTool {...result} />
-                                                </div>
-                                            )
+                                            // Error al hacer el build ahora no puede crear el cv
+                                            // !!!REVISAR
+                                        // case Tools.cvTool:
+                                        //     return (
+                                        //         <div key={toolCallId}>
+                                        //             <GenerateCVTool {...result} />
+                                        //         </div>
+                                        //     )
                                         default:
                                             break;
                                     }
@@ -166,5 +170,3 @@ const ChatbotComponent = () => {
         </div>
     )
 }
-
-export default ChatbotComponent
