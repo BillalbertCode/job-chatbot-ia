@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     const { messages } = await req.json()
 
     const result = await streamText({
-        model: google("gemini-1.5-pro-latest"),
+        model: google("gemini-2.5-flash"),
         messages: convertToCoreMessages(messages),
         system: "Eres un asistente especializado en asesoramiento profesional y solo responderás preguntas relacionadas con el trabajo. Tus respuestas deben ser simples a menos que te pidan que las expliques.",
         tools,
